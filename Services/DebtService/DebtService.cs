@@ -11,25 +11,31 @@ namespace backend.Services.DebtService
   public class DebtService : IDebtService
   {
     private static List<Debt> debts = new List<Debt> {
-        new Debt(),
+        new Debt{},
         new Debt{ id = 1 },
+    };
+
+    private static List<Portion> portions = new List<Portion>
+    {
+      new Portion{id = 2},
     };
     private readonly IMapper _mapper;
 
     public DebtService(IMapper mapper)
     {
       _mapper = mapper;
-
     }
     public async Task<ServiceResponse<List<GetDebtDto>>> AddDebt(AddDebtDto newDebt)
     {
       ServiceResponse<List<GetDebtDto>> serviceResponse = new ServiceResponse<List<GetDebtDto>>();
 
       Debt debt = _mapper.Map<Debt>(newDebt);
-
       debt.id = debts.Max(d => d.id) + 1;
-
       debts.Add(debt);
+
+      Portion portion = _mapper.Map<Portion>(newDebt.portions);
+      portion.id = portions.Max(p => p.id) + 1;
+      portions.Add(portion);
 
       serviceResponse.Data = (debts.Select(c => _mapper.Map<GetDebtDto>(c))).ToList();
 
@@ -85,6 +91,8 @@ namespace backend.Services.DebtService
         debt.interestValue = updatedDebt.interestValue;
         debt.calculatedValue = updatedDebt.calculatedValue;
         debt.interestType = updatedDebt.interestType;
+        debt.customerId = updatedDebt.customerId;
+        debt.coworkerPhone = updatedDebt.coworkerPhone;
 
         serviceResponse.Data = _mapper.Map<GetDebtDto>(debt);
       }
