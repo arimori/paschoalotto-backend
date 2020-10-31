@@ -1,4 +1,3 @@
-using backend.Dtos.Debt;
 using backend.Models;
 using backend.Services.DebtService;
 using Microsoft.AspNetCore.Mvc;
@@ -30,15 +29,15 @@ namespace backend.Controllers
     }
 
     [HttpPost]
-    public async Task<IActionResult> Add(AddDebtDto newDebt)
+    public async Task<IActionResult> Add(Debt newDebt)
     {
       return Ok(await _debtService.AddDebt(newDebt));
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update(UpdateDebtDto updatedDebt)
+    public async Task<IActionResult> Update(Debt updatedDebt)
     {
-      ServiceResponse<GetDebtDto> response = await _debtService.UpdateDebt(updatedDebt);
+      ServiceResponse<Debt> response = await _debtService.UpdateDebt(updatedDebt);
 
       if (response.Data == null)
       {
@@ -51,7 +50,7 @@ namespace backend.Controllers
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-      ServiceResponse<List<GetDebtDto>> response = await _debtService.DeleteDebt(id);
+      ServiceResponse<List<Debt>> response = await _debtService.DeleteDebt(id);
 
       if (response.Data == null)
       {
