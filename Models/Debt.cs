@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace backend.Models
@@ -16,5 +17,6 @@ namespace backend.Models
     public int customerId { get; set; }
     public string customerName { get; set; }
     public string coworkerPhone { get; set; }
+    public List<Portion> portions { get; set; }
   }
 }

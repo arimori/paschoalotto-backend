@@ -1,5 +1,4 @@
 using AutoMapper;
-using backend.Dtos.Debt;
 using backend.Models;
 
 namespace backend
@@ -8,8 +7,7 @@ namespace backend
   {
     public AutoMapperProfile()
     {
-      CreateMap<Debt, GetDebtDto>();
-      CreateMap<AddDebtDto, Debt>();
+      CreateMap<Debt, Debt>();
     }
   }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using backend.Dtos.Debt;
 using backend.Models;
 
 namespace backend.Services.DebtService
@@ -25,32 +24,29 @@ namespace backend.Services.DebtService
     {
       _mapper = mapper;
     }
-    public async Task<ServiceResponse<List<GetDebtDto>>> AddDebt(AddDebtDto newDebt)
+    public async Task<ServiceResponse<List<Debt>>> AddDebt(Debt newDebt)
     {
-      ServiceResponse<List<GetDebtDto>> serviceResponse = new ServiceResponse<List<GetDebtDto>>();
+      ServiceResponse<List<Debt>> serviceResponse = new ServiceResponse<List<Debt>>();
 
       Debt debt = _mapper.Map<Debt>(newDebt);
-      debt.id = debts.Max(d => d.id) + 1;
+      debt.id = debts.Max(d => d.id) + 1;      
+
       debts.Add(debt);
 
-      Portion portion = _mapper.Map<Portion>(newDebt.portions);
-      portion.id = portions.Max(p => p.id) + 1;
-      portions.Add(portion);
-
-      serviceResponse.Data = (debts.Select(c => _mapper.Map<GetDebtDto>(c))).ToList();
-
+      serviceResponse.Data = (debts.Select(c => _mapper.Map<Debt>(c))).ToList();
       return serviceResponse;
     }
 
-    public async Task<ServiceResponse<List<GetDebtDto>>> DeleteDebt(int id)
+    public async Task<ServiceResponse<List<Debt>>> DeleteDebt(int id)
     {
-      ServiceResponse<List<GetDebtDto>> serviceResponse = new ServiceResponse<List<GetDebtDto>>();
+      ServiceResponse<List<Debt>> serviceResponse = new ServiceResponse<List<Debt>>();
       try
       {
         Debt debt = debts.First(d => d.id == id);
         debts.Remove(debt);
 
-        serviceResponse.Data = (debts.Select(d => _mapper.Map<GetDebtDto>(d))).ToList();
+        serviceResponse.Data = (debts.Select(d => _mapper.Map<Debt>(d))).ToList();
+
       }
       catch (Exception ex)
       {
@@ -60,27 +56,27 @@ namespace backend.Services.DebtService
       return serviceResponse;
     }
 
-    public async Task<ServiceResponse<List<GetDebtDto>>> GetAll()
+    public async Task<ServiceResponse<List<Debt>>> GetAll()
     {
-      ServiceResponse<List<GetDebtDto>> serviceResponse = new ServiceResponse<List<GetDebtDto>>();
+      ServiceResponse<List<Debt>> serviceResponse = new ServiceResponse<List<Debt>>();
 
-      serviceResponse.Data = (debts.Select(d => _mapper.Map<GetDebtDto>(d))).ToList();
+      serviceResponse.Data = (debts.Select(d => _mapper.Map<Debt>(d))).ToList();
 
       return serviceResponse;
     }
 
-    public async Task<ServiceResponse<GetDebtDto>> GetDebtById(int id)
+    public async Task<ServiceResponse<Debt>> GetDebtById(int id)
     {
-      ServiceResponse<GetDebtDto> serviceResponse = new ServiceResponse<GetDebtDto>();
+      ServiceResponse<Debt> serviceResponse = new ServiceResponse<Debt>();
 
-      serviceResponse.Data = _mapper.Map<GetDebtDto>(debts.FirstOrDefault(debt => debt.id == id));
+      serviceResponse.Data = _mapper.Map<Debt>(debts.FirstOrDefault(debt => debt.id == id));
 
       return serviceResponse;
     }
 
-    public async Task<ServiceResponse<GetDebtDto>> UpdateDebt(UpdateDebtDto updatedDebt)
+    public async Task<ServiceResponse<Debt>> UpdateDebt(Debt updatedDebt)
     {
-      ServiceResponse<GetDebtDto> serviceResponse = new ServiceResponse<GetDebtDto>();
+      ServiceResponse<Debt> serviceResponse = new ServiceResponse<Debt>();
       try
       {
         Debt debt = debts.FirstOrDefault(d => d.id == updatedDebt.id);
@@ -94,7 +90,7 @@ namespace backend.Services.DebtService
         debt.customerId = updatedDebt.customerId;
         debt.coworkerPhone = updatedDebt.coworkerPhone;
 
-        serviceResponse.Data = _mapper.Map<GetDebtDto>(debt);
+        serviceResponse.Data = _mapper.Map<Debt>(debt);
       }
       catch (Exception ex)
       {
