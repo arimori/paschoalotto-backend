@@ -30,7 +30,18 @@ namespace backend
       services.AddControllers();
       services.AddAutoMapper(typeof(Startup));
       services.AddScoped<IDebtService, DebtService>();
-        
+
+      services.AddCors(options =>
+      {
+        options.AddPolicy("AllowAnyOrigin",
+        builder =>
+        {
+          builder.WithOrigins("http://localhost:3000",
+                              "http://localhost:5000");
+        });
+
+      });
+
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +55,8 @@ namespace backend
       // app.UseHttpsRedirection();
 
       app.UseRouting();
+
+      app.UseCors(option => option.AllowAnyOrigin());
 
       app.UseAuthorization();
 
