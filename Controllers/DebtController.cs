@@ -16,7 +16,7 @@ namespace backend.Controllers
       _debtService = debtService;
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("GetAll")]    
     public async Task<IActionResult> Get()
     {
       return Ok(await _debtService.GetAll());

@@ -89,6 +89,8 @@ namespace backend.Services.DebtService
         debt.interestType = updatedDebt.interestType;
         debt.customerId = updatedDebt.customerId;
         debt.coworkerPhone = updatedDebt.coworkerPhone;
+        debt.interestRate = updatedDebt.interestRate;
+        debt.delayDays = updatedDebt.delayDays;
 
         serviceResponse.Data = _mapper.Map<Debt>(debt);
       }

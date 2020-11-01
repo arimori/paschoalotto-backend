@@ -11,11 +11,12 @@ namespace backend.Models
     public decimal commissionPercentage { get; set; }
     public DateTime dueDate { get; set; }
     public decimal originalValue { get; set; }
-    public decimal interestValue { get; set; }
+    public decimal interestValue { get; set; }    
+    public decimal interestRate { get; set; }
+    public int delayDays { get; set; }
     public decimal calculatedValue { get; set; }
     public InterestType interestType { get; set; }
     public int customerId { get; set; }
-    public string customerName { get; set; }
     public string coworkerPhone { get; set; }
     public List<Portion> portions { get; set; }
   }
