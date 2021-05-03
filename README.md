@@ -36,7 +36,7 @@ Aplicação Web deste projeto: [Acesse Aqui!](https://github.com/NaoshiAC/pascho
 
 ## Working On :fire:
 
-Até o momento, apenas o MVP deste projeto foi finalizado (WEB e API). Assim sendo, nos próximos dias implementarei novas funcionalidades a fim de tornar melhor tanto a usabilidade deste sistema, quanto a disponibilidade dos dados, a fim de me aperfeiçoar nestas tecnologias.
+Até o momento, apenas o MVP deste projeto foi finalizado (WEB App e API Rest). Assim sendo, nos próximos dias implementarei novas funcionalidades a fim de tornar melhor tanto a usabilidade deste sistema, quanto a disponibilidade dos dados, a fim de me aperfeiçoar nestas tecnologias.
 
 
 
